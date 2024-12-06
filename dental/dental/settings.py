@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'dental.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  # This indicates PostgreSQL
+        'NAME': 'dental',
+        'USER': 'postgres',
+        'PASSWORD': '6979samZ.@',
+        'HOST': 'localhost',  # Or the database server's IP
+        'PORT': '5432',       # Default PostgreSQL port
     }
 }
 
