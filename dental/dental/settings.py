@@ -55,7 +55,7 @@ ROOT_URLCONF = 'dental.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'dental_management/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

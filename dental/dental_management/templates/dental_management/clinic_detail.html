@@ -1,0 +1,16 @@
+{% extends 'dental_management/base.html' %}
+
+
+{% block content %}
+<h2>{{ clinic.name }}</h2>
+<p><strong>Phone:</strong> {{ clinic.phone_number }}</p>
+<p><strong>City:</strong> {{ clinic.city }}</p>
+<p><strong>State:</strong> {{ clinic.state }}</p>
+<p><strong>Email:</strong> {{ clinic.email }}</p>
+
+<a href="{% url 'clinic_update' clinic.pk %}" class="btn btn-warning">Edit</a>
+<form method="POST" action="{% url 'clinic_delete' clinic.pk %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}
