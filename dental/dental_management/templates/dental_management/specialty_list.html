@@ -1,0 +1,17 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}Specialties - Dental Management{% endblock %}
+
+{% block content %}
+<h2>Specialties</h2>
+<ul>
+    {% for specialty in specialties %}
+        <li>
+            <a href="{% url 'specialty_detail' specialty.pk %}">{{ specialty.name }}</a>
+        </li>
+    {% empty %}
+        <li>No specialties available.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'specialty_create' %}" class="btn btn-primary">Add Specialty</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}{{ specialty.name }} - Dental Management{% endblock %}
+
+{% block content %}
+<h2>{{ specialty.name }}</h2>
+<a href="{% url 'specialty_update' specialty.pk %}" class="btn btn-warning">Edit</a>
+<form method="POST" action="{% url 'specialty_delete' specialty.pk %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}

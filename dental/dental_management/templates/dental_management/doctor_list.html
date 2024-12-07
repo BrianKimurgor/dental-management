@@ -1,0 +1,17 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}Doctors - Dental Management{% endblock %}
+
+{% block content %}
+<h2>Doctors</h2>
+<ul>
+    {% for doctor in doctors %}
+        <li>
+            <a href="{% url 'doctor_detail' doctor.pk %}">{{ doctor.name }}</a> - {{ doctor.npi }}
+        </li>
+    {% empty %}
+        <li>No doctors available.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'doctor_create' %}" class="btn btn-primary">Add Doctor</a>
+{% endblock %}

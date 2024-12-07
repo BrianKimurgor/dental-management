@@ -1,0 +1,18 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}{{ doctor.name }} - Dental Management{% endblock %}
+
+{% block content %}
+<h2>{{ doctor.name }}</h2>
+<p><strong>NPI:</strong> {{ doctor.npi }}</p>
+<p><strong>Email:</strong> {{ doctor.email }}</p>
+<p><strong>Phone:</strong> {{ doctor.phone_number }}</p>
+<p><strong>Specialties:</strong> {% for specialty in doctor.specialties.all %} {{ specialty.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+<p><strong>Clinics:</strong> {% for clinic in doctor.clinics.all %} {{ clinic.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+<a href="{% url 'doctor_update' doctor.pk %}" class="btn btn-warning">Edit</a>
+<form method="POST" action="{% url 'doctor_delete' doctor.pk %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}
