@@ -1,0 +1,18 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}{{ patient.name }} - Dental Management{% endblock %}
+
+{% block content %}
+<h2>{{ patient.name }}</h2>
+<p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+<p><strong>Phone:</strong> {{ patient.phone_number }}</p>
+<p><strong>Gender:</strong> {{ patient.get_gender_display }}</p>
+<p><strong>Address:</strong> {{ patient.address }}</p>
+<p><strong>SSN Last 4:</strong> {{ patient.ssn_last4 }}</p>
+
+<a href="{% url 'patient_update' patient.pk %}" class="btn btn-warning">Edit</a>
+<form method="POST" action="{% url 'patient_delete' patient.pk %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}
