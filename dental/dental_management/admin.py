@@ -16,12 +16,18 @@ class PatientAdmin(admin.ModelAdmin):
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ('date', 'procedure', 'clinic', 'doctor', 'patient')
+    # Update 'date' to 'date_time' to match the field in the Appointment model
+    list_display = ('date_time', 'procedure', 'clinic', 'doctor', 'patient')
+    list_filter = ('date_time', 'clinic', 'doctor')
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-    list_display = ('date', 'clinic', 'doctor', 'patient')
-    filter_horizontal = ('procedures',)
+    # Update 'date' to 'date_time' to match the field in the Visit model
+    list_display = ('date_time', 'clinic', 'doctor', 'patient')
+    list_filter = ('date_time', 'clinic', 'doctor')
+    # Remove or replace filter_horizontal with a valid Many-to-Many field if applicable
+    # For now, leaving it empty since Visit doesn't have a Many-to-Many field in the provided code
+    filter_horizontal = []
 
 @admin.register(Specialty)
 class SpecialtyAdmin(admin.ModelAdmin):

@@ -1,20 +1,18 @@
 from django.db import models
-from django.utils import timezone
-from .clinic import Clinic
 from .doctor import Doctor
+from .clinic import Clinic
 from .patient import Patient
-from .procedure import Procedure
 
 class Visit(models.Model):
     """
-    Represents a visit record with normalized procedures.
+    Represents a patient's visit record.
     """
-    date = models.DateTimeField(default=timezone.now)
-    notes = models.TextField(null=True, blank=True)
-    procedures = models.ManyToManyField(Procedure)
-    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    date_time = models.DateTimeField(auto_now_add=True)  # Automatically record visit time
+    notes = models.TextField(null=True, blank=True)  # Optional notes about the visit
+    procedures = models.CharField(max_length=255)  # Comma-separated procedures
+    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE, related_name='visits')
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='visits')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='visits')
 
     def __str__(self):
-        return f"Visit on {self.date} by {self.doctor.name}"
+        return f"Visit by {self.patient.name} at {self.clinic.name} with Dr. {self.doctor.name}"

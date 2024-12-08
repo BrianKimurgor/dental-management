@@ -15,4 +15,40 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
 </form>
+
+<hr>
+
+<h3>Visits</h3>
+<ul>
+    {% for visit in patient.visits.all %}
+        <li>
+            <strong>Date:</strong> {{ visit.date_time }} <br>
+            <strong>Clinic:</strong> {{ visit.clinic.name }} <br>
+            <strong>Doctor:</strong> {{ visit.doctor.name }} <br>
+            <strong>Procedures:</strong> {{ visit.procedures }} <br>
+            <strong>Notes:</strong> {{ visit.notes }}
+        </li>
+    {% empty %}
+        <li>No visits recorded for this patient.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'visit_create' %}" class="btn btn-primary">Add Visit</a>
+
+<hr>
+
+<h3>Appointments</h3>
+<ul>
+    {% for appointment in patient.appointments.all %}
+        <li>
+            <strong>Date:</strong> {{ appointment.date_time }} <br>
+            <strong>Clinic:</strong> {{ appointment.clinic.name }} <br>
+            <strong>Doctor:</strong> {{ appointment.doctor.name }} <br>
+            <strong>Procedure:</strong> {{ appointment.procedure }}
+        </li>
+    {% empty %}
+        <li>No appointments scheduled for this patient.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'appointment_create' %}" class="btn btn-primary">Schedule Appointment</a>
+
 {% endblock %}

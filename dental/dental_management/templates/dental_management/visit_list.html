@@ -1,0 +1,13 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}Visits{% endblock %}
+
+{% block content %}
+<h2>Visits</h2>
+<ul>
+    {% for visit in visits %}
+        <li>{{ visit.date_time }} - {{ visit.clinic.name }} - Dr. {{ visit.doctor.name }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'visit_create' %}" class="btn btn-primary">Add Visit</a>
+{% endblock %}

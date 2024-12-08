@@ -7,12 +7,35 @@
 <p><strong>NPI:</strong> {{ doctor.npi }}</p>
 <p><strong>Email:</strong> {{ doctor.email }}</p>
 <p><strong>Phone:</strong> {{ doctor.phone_number }}</p>
-<p><strong>Specialties:</strong> {% for specialty in doctor.specialties.all %} {{ specialty.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-<p><strong>Clinics:</strong> {% for clinic in doctor.clinics.all %} {{ clinic.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
-<a href="{% url 'doctor_update' doctor.pk %}" class="btn btn-warning">Edit</a>
-<form method="POST" action="{% url 'doctor_delete' doctor.pk %}" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Delete</button>
-</form>
+<p><strong>Specialties:</strong>
+    {% for specialty in doctor.specialties.all %}
+        {{ specialty.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+
+<p><strong>Clinics:</strong>
+    {% for clinic in doctor.clinics.all %}
+        {{ clinic.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+
+<hr>
+
+<h3>Upcoming Appointments</h3>
+<ul>
+    {% for appointment in doctor.appointments.all %}
+        <li>
+            <strong>Date:</strong> {{ appointment.date_time }} <br>
+            <strong>Patient:</strong> {{ appointment.patient.name }} <br>
+            <strong>Clinic:</strong> {{ appointment.clinic.name }} <br>
+            <strong>Procedure:</strong> {{ appointment.procedure }}
+        </li>
+    {% empty %}
+        <li>No upcoming appointments for this doctor.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'appointment_create' %}" class="btn btn-primary">Schedule Appointment</a>
+
 {% endblock %}

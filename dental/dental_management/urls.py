@@ -1,12 +1,15 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from dental_management.views.clinic_views import clinic_list, clinic_detail, clinic_create, clinic_update, clinic_delete
 from dental_management.views.doctor_views import doctor_list, doctor_detail, doctor_create, doctor_update, doctor_delete
 from dental_management.views.specialty_views import specialty_list, specialty_detail, specialty_create, specialty_update, specialty_delete
 from dental_management.views.patient_views import patient_list, patient_detail, patient_create, patient_update, patient_delete
+from dental_management.views.visit_views import visit_list, visit_create
+from dental_management.views.appointment_views import appointment_list, appointment_create
 
 
 urlpatterns = [
+   
     #doctors
     path('doctors/', doctor_list, name='doctor_list'),
     path('doctors/<int:pk>/', doctor_detail, name='doctor_detail'),
@@ -31,5 +34,11 @@ urlpatterns = [
     path('clinics/create/', clinic_create, name='clinic_create'),  # This is the create URL pattern
     path('clinics/<int:pk>/edit/', clinic_update, name='clinic_update'),
     path('clinics/<int:pk>/delete/', clinic_delete, name='clinic_delete'),
+    #visits
+    path('visits/<int:patient_id>/', visit_list, name='visit_list'),
+    path('visits/create/', visit_create, name='visit_create'),
+    #appintments
+    path('appointments/<int:patient_id>/', appointment_list, name='appointment_list'),
+    path('appointments/create/', appointment_create, name='appointment_create'),
 
 ]

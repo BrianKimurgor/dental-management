@@ -1,0 +1,15 @@
+{% extends 'dental_management/base.html' %}
+
+{% block title %}Schedule Appointment - Dental Management{% endblock %}
+
+{% block content %}
+<h2>Schedule Appointment</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+</form>
+
+<a href="{% url 'appointment_list' patient_id=form.cleaned_data.patient.id %}" class="btn btn-secondary">Back to Appointments</a>
+{% endblock %}

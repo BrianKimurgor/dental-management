@@ -1,19 +1,17 @@
 from django.db import models
-from django.utils import timezone
-from .clinic import Clinic
 from .doctor import Doctor
+from .clinic import Clinic
 from .patient import Patient
-from .procedure import Procedure
 
 class Appointment(models.Model):
     """
-    Represents an appointment in the healthcare system.
+    Represents an appointment in the system.
     """
-    date = models.DateTimeField(default=timezone.now)
-    procedure = models.ForeignKey(Procedure, on_delete=models.CASCADE)
-    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    date_time = models.DateTimeField()  # Date and time of the appointment
+    procedure = models.CharField(max_length=100)  # Procedure name
+    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE, related_name='appointments')
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='appointments')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='appointments')
 
     def __str__(self):
-        return f"{self.procedure.name} on {self.date}"
+        return f"{self.procedure} for {self.patient.name} with Dr. {self.doctor.name} on {self.date_time}"
