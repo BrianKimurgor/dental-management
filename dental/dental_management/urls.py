@@ -8,7 +8,10 @@ from dental_management.views.visit_views import visit_list, visit_create
 from dental_management.views.appointment_views import appointment_list, appointment_create
 
 
+
 urlpatterns = [
+    
+    
    
     #doctors
     path('doctors/', doctor_list, name='doctor_list'),

@@ -2,19 +2,23 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from dental_management.models import Clinic
 from dental_management.forms.clinic_forms import ClinicForm
+from django.contrib.auth.decorators import login_required
 
 
 # List all clinics
+@login_required
 def clinic_list(request):
     clinics = Clinic.objects.all()
     return render(request, 'dental_management/clinic_list.html', {'clinics': clinics})
 
 # View clinic details
+@login_required
 def clinic_detail(request, pk):
     clinic = get_object_or_404(Clinic, pk=pk)
     return render(request, 'dental_management/clinic_detail.html', {'clinic': clinic})
 
 # Create a new clinic
+@login_required
 def clinic_create(request):
     if request.method == "POST":
         form = ClinicForm(request.POST)
@@ -26,6 +30,7 @@ def clinic_create(request):
     return render(request, 'dental_management/clinic_form.html', {'form': form})
 
 # Update an existing clinic
+@login_required
 def clinic_update(request, pk):
     clinic = get_object_or_404(Clinic, pk=pk)
     if request.method == "POST":
@@ -38,6 +43,7 @@ def clinic_update(request, pk):
     return render(request, 'dental_management/clinic_form.html', {'form': form})
 
 # Delete a clinic
+@login_required
 def clinic_delete(request, pk):
     clinic = get_object_or_404(Clinic, pk=pk)
     if request.method == "POST":

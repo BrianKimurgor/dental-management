@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from dental_management.models import Appointment
 from dental_management.forms.appointment_form import AppointmentForm
+from django.contrib.auth.decorators import login_required
 
 # List all appointments for a patient
 def appointment_list(request, patient_id):
@@ -8,6 +9,7 @@ def appointment_list(request, patient_id):
     return render(request, 'dental_management/appointment_list.html', {'appointments': appointments})
 
 # Schedule a new appointment
+@login_required
 def appointment_create(request):
     if request.method == "POST":
         form = AppointmentForm(request.POST)

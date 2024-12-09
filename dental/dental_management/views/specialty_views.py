@@ -1,18 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from dental_management.models import Specialty
 from dental_management.forms.specialty_form import SpecialtyForm
+from django.contrib.auth.decorators import login_required
 
 # List all specialties
+@login_required
 def specialty_list(request):
     specialties = Specialty.objects.all()
     return render(request, 'dental_management/specialty_list.html', {'specialties': specialties})
 
 # View specialty details
+@login_required
 def specialty_detail(request, pk):
     specialty = get_object_or_404(Specialty, pk=pk)
     return render(request, 'dental_management/specialty_detail.html', {'specialty': specialty})
 
 # Create a new specialty
+@login_required
 def specialty_create(request):
     if request.method == "POST":
         form = SpecialtyForm(request.POST)
@@ -24,6 +28,7 @@ def specialty_create(request):
     return render(request, 'dental_management/specialty_form.html', {'form': form})
 
 # Update an existing specialty
+@login_required
 def specialty_update(request, pk):
     specialty = get_object_or_404(Specialty, pk=pk)
     if request.method == "POST":
@@ -36,6 +41,7 @@ def specialty_update(request, pk):
     return render(request, 'dental_management/specialty_form.html', {'form': form})
 
 # Delete a specialty
+@login_required
 def specialty_delete(request, pk):
     specialty = get_object_or_404(Specialty, pk=pk)
     if request.method == "POST":

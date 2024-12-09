@@ -1,18 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from dental_management.models import Patient
 from dental_management.forms.patient_forms import PatientForm
+from django.contrib.auth.decorators import login_required
 
 # List all patients
+@login_required
 def patient_list(request):
     patients = Patient.objects.all()
     return render(request, 'dental_management/patient_list.html', {'patients': patients})
 
 # View patient details
+@login_required
 def patient_detail(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     return render(request, 'dental_management/patient_detail.html', {'patient': patient})
 
 # Create a new patient
+@login_required
 def patient_create(request):
     if request.method == "POST":
         form = PatientForm(request.POST)
@@ -24,6 +28,7 @@ def patient_create(request):
     return render(request, 'dental_management/patient_form.html', {'form': form})
 
 # Update an existing patient
+@login_required
 def patient_update(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     if request.method == "POST":
@@ -36,6 +41,7 @@ def patient_update(request, pk):
     return render(request, 'dental_management/patient_form.html', {'form': form})
 
 # Delete a patient
+@login_required
 def patient_delete(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     if request.method == "POST":

@@ -127,3 +127,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/dental_management/login/'
+LOGIN_REDIRECT_URL = '/dental_management/clinics/'  # Redirect after login
+LOGOUT_REDIRECT_URL = '/login/'  # Path to your login view
+

@@ -1,13 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from dental_management.models import Visit, Appointment
 from dental_management.forms.visit_forms import VisitForm
+from django.contrib.auth.decorators import login_required
 
 # List all visits for a patient
+@login_required
 def visit_list(request, patient_id):
     visits = Visit.objects.filter(patient_id=patient_id)
     return render(request, 'dental_management/visit_list.html', {'visits': visits})
 
 # Add a new visit
+@login_required
 def visit_create(request, appointment_id=None):
     # If an appointment ID is passed, pre-fill the form with related appointment data
     if appointment_id:
