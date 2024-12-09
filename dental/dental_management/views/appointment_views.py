@@ -10,7 +10,7 @@ def appointment_list(request, patient_id):
 # Schedule a new appointment
 def appointment_create(request):
     if request.method == "POST":
-        form = AppointmentForm(request.POST, user=request.user)
+        form = AppointmentForm(request.POST)
         if form.is_valid():
             # Check for doctor availability
             doctor = form.cleaned_data['doctor']
