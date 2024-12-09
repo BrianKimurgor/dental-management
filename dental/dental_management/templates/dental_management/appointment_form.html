@@ -3,13 +3,27 @@
 {% block title %}Schedule Appointment - Dental Management{% endblock %}
 
 {% block content %}
-<h2>Schedule Appointment</h2>
-
-<form method="POST">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="text-center">
+        <h2 class="mb-4">Schedule Appointment</h2>
+        <form method="POST" class="text-left">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+    <div class="form-group">
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors|striptags }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mt-3">Schedule Appointment</button>
 </form>
 
-
+    </div>
+</div>
 {% endblock %}

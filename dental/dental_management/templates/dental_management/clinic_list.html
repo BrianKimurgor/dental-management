@@ -1,15 +1,16 @@
 {% extends 'dental_management/base.html' %}
 
-
 {% block content %}
-<h2>Clinics</h2>
-<ul>
-    {% for clinic in clinics %}
-    <li>
-        <a href="{% url 'clinic_detail' clinic.pk %}">{{ clinic.name }}</a>
-        - {{ clinic.city }}, {{ clinic.state }}
-    </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'clinic_create' %}" class="btn btn-primary">Add Clinic</a>
+<div class="d-flex flex-column align-items-center mt-4">
+    <h2>Clinics</h2>
+    <ul class="list-unstyled w-50 text-center">
+        {% for clinic in clinics %}
+        <li class="mb-2">
+            <a href="{% url 'clinic_detail' clinic.pk %}" class="text-decoration-none">{{ clinic.name }}</a>
+            - {{ clinic.city }}, {{ clinic.state }}
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'clinic_create' %}" class="btn btn-primary mt-3">Add Clinic</a>
+</div>
 {% endblock %}

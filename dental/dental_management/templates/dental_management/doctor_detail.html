@@ -3,39 +3,40 @@
 {% block title %}{{ doctor.name }} - Dental Management{% endblock %}
 
 {% block content %}
-<h2>{{ doctor.name }}</h2>
-<p><strong>NPI:</strong> {{ doctor.npi }}</p>
-<p><strong>Email:</strong> {{ doctor.email }}</p>
-<p><strong>Phone:</strong> {{ doctor.phone_number }}</p>
+<div class="d-flex flex-column align-items-center mt-4">
+    <h2>{{ doctor.name }}</h2>
+    <p><strong>NPI:</strong> {{ doctor.npi }}</p>
+    <p><strong>Email:</strong> {{ doctor.email }}</p>
+    <p><strong>Phone:</strong> {{ doctor.phone_number }}</p>
 
-<p><strong>Specialties:</strong>
-    {% for specialty in doctor.specialties.all %}
-        {{ specialty.name }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</p>
+    <p><strong>Specialties:</strong>
+        {% for specialty in doctor.specialties.all %}
+            {{ specialty.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
 
-<p><strong>Clinics:</strong>
-    {% for clinic in doctor.clinics.all %}
-        {{ clinic.name }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</p>
+    <p><strong>Clinics:</strong>
+        {% for clinic in doctor.clinics.all %}
+            {{ clinic.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
 
-<hr>
+    <hr class="w-50">
 
-<h3>Upcoming Appointments</h3>
-<ul>
-    {% for appointment in doctor.appointments.all %}
-        <li>
-            <strong>Date:</strong> {{ appointment.date_time }} <br>
-            <strong>Patient:</strong> {{ appointment.patient.name }} <br>
-            <strong>Clinic:</strong> {{ appointment.clinic.name }} <br>
-            <strong>Procedure:</strong> {{ appointment.procedure }}
-        </li>
-    {% empty %}
-        <li>No upcoming appointments for this doctor.</li>
-    {% endfor %}
-</ul>
+    <h3>Upcoming Appointments</h3>
+    <ul class="list-unstyled w-50 text-center">
+        {% for appointment in doctor.appointments.all %}
+            <li class="mb-3">
+                <strong>Date:</strong> {{ appointment.date_time }} <br>
+                <strong>Patient:</strong> {{ appointment.patient.name }} <br>
+                <strong>Clinic:</strong> {{ appointment.clinic.name }} <br>
+                <strong>Procedure:</strong> {{ appointment.procedure }}
+            </li>
+        {% empty %}
+            <li>No upcoming appointments for this doctor.</li>
+        {% endfor %}
+    </ul>
 
-<a href="{% url 'appointment_create' %}" class="btn btn-primary">Schedule Appointment</a>
-
+    <a href="{% url 'appointment_create' %}" class="btn btn-primary">Schedule Appointment</a>
+</div>
 {% endblock %}
