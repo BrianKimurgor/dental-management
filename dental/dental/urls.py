@@ -21,5 +21,9 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dental_management/', include('dental_management.urls')),
-    path('api/', include('dental_management.api.doctor.urls')),
+    path('api/doctors/', include('dental_management.api.doctor.urls')),
+    path('api/patients/', include ('dental_management.api.patients.urls')),
+    path('api/clinics/', include('dental_management.api.clinics.urls')),
+    path('api/appointments/', include('dental_management.api.appointments.urls')),
+    path('api/visits/', include('dental_management.api.visits.urls')),
 ]
